@@ -7,6 +7,8 @@ import sys
 import os
 from tkinter import *
 
+f=open('202101.txt', 'a')
+f.close()
 
 class App(tkinter.Tk) :
     def __init__(self) :
@@ -401,9 +403,15 @@ class PageTwo(tkinter.Frame) :
                         mnumber.append(int(data[2]))                    
                     score.append(0)
                     number.append(int(data[2]))          
-            average=((sum(score)/sum(number)))
+            if sum(number)==0:
+                average=0
+            else:    
+                average=((sum(score)/sum(number)))
             average=round(average,2)
-            maverage=((sum(major)/sum(mnumber)))
+            if sum(mnumber)==0:
+                maverage=0
+            else:
+                maverage=((sum(major)/sum(mnumber)))
             maverage=round(maverage,2)                             
             msgbox.showinfo("평점", "총평점: "+str(average) + " 전공평점: " +str(maverage) + " 학점수: " +str(sum(number)+sum(pnumber))) 
 
