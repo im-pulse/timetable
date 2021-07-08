@@ -111,7 +111,6 @@ class PageOne(tkinter.Frame) :
 
 
 
-        # 과목 추가하기
         def add_subject() :
             number_of_items = len(subject_treeview.get_children())
 
@@ -149,14 +148,73 @@ class PageOne(tkinter.Frame) :
 
                 # 시간 항목
                 time_label = Label(add_screen, text = "시간", font = font_settings)
-                time_label.grid(row = 5, column = 0, sticky = W, padx = 10, pady = 10)
-                time = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 5, values = ["월", "화", "수", "목", "금"], font = font_settings)
-                time.grid(row = 5, column = 1, sticky = N+E+W+S, padx = 10, pady = 10)
+                time_label.grid(row = 6, column = 0, sticky = W+S, padx = 10, pady = 4)
+
+                days_list = ["","월요일", "화요일", "수요일", "목요일", "금요일"]
+                period_list = ["","1교시", "2교시", "3교시", "4교시", "5교시", "6교시", "7교시", "8교시", "9교시", "10교시", "11교시", "12교시"]
+
+                time_1_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+                time_1_days.grid(row = 6, column = 1, sticky = W+S, padx = 10)
+                time_1_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+                time_1_period.grid(row = 6, column = 2, sticky = E+S, padx = 10)
+
+                time_2_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+                time_2_days.grid(row = 7, column = 1, sticky = W, padx = 10)
+                time_2_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+                time_2_period.grid(row = 7, column = 2, sticky = E, padx = 10)
+
+                time_3_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+                time_3_days.grid(row = 8, column = 1, sticky = W, padx = 10)
+                time_3_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+                time_3_period.grid(row = 8, column = 2, sticky = E, padx = 10)
+
+                time_4_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+                time_4_days.grid(row = 9, column = 1, sticky = W, padx = 10)
+                time_4_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+                time_4_period.grid(row = 9, column = 2, sticky = E, padx = 10)
+
+                time_5_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+                time_5_days.grid(row = 10, column = 1, sticky = W, padx = 10)
+                time_5_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+                time_5_period.grid(row = 10, column = 2, sticky = E, padx = 10)
+
+                time_6_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+                time_6_days.grid(row = 11, column = 1, sticky = W, padx = 10)
+                time_6_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+                time_6_period.grid(row = 11, column = 2, sticky = E, padx = 10)
 
 
 
                 # 모든 항목 정상적으로 입력 여부 확인
                 def add_subject_ok() :
+                    time = []
+
+                    if time_1_days.get() != "" and time_1_period.get() != "" :
+                        time_1 = str(time_1_days.get()[0]) + str(time_1_period.get()).replace("교시", "")
+                        time.append(time_1)
+
+                    if time_2_days.get() != "" and time_2_period.get() != "" :
+                        time_2 = str(time_2_days.get()[0]) + str(time_2_period.get()).replace("교시", "")
+                        time.append(time_2)
+
+                    if time_3_days.get() != "" and time_3_period.get() != "" :
+                        time_3 = str(time_3_days.get()[0]) + str(time_3_period.get()).replace("교시", "")
+                        time.append(time_3)
+
+                    if time_4_days.get() != "" and time_4_period.get() != "" :
+                        time_4 = str(time_4_days.get()[0]) + str(time_4_period.get()).replace("교시", "")
+                        time.append(time_4)
+
+                    if time_5_days.get() != "" and time_5_period.get() != "" :
+                        time_5 = str(time_5_days.get()[0]) + str(time_5_period.get()).replace("교시", "")
+                        time.append(time_5)
+
+                    if time_6_days.get() != "" and time_6_period.get() != "" :
+                        time_6 = str(time_6_days.get()[0]) + str(time_6_period.get()).replace("교시", "")
+                        time.append(time_6)
+
+                    time = tuple(time)
+
                     if subject.get() == "" :
                         tkinter.messagebox.showwarning("", "과목명을 입력하세요.")
                     elif professor.get() == "" :
@@ -165,21 +223,21 @@ class PageOne(tkinter.Frame) :
                         tkinter.messagebox.showwarning("", "학점을 선택하세요.")
                     elif type.get() == "" :
                         tkinter.messagebox.showwarning("", "이수구분을 선택하세요.")
-                    elif time.get() == "" :
+                    elif time == "" :
                         tkinter.messagebox.showwarning("", "시간을 선택하세요.")
                     else :
-                        subject_treeview.insert(parent = "", index = "end", text = "", values = (subject.get(), professor.get(), credit.get(), type.get(), time.get(), "0"))
+                        subject_treeview.insert(parent = "", index = "end", text = "", values = (subject.get(), professor.get(), credit.get(), type.get(), time, "0"))
 
-                        save_data() # 과목 삭제 후 자동으로 저장
+                        save_data() # 과목 입력 후 자동으로 저장
                         add_screen.destroy()
                     
 
 
                 # 확인 버튼
                 ok_button = Button(add_screen, text = "확인", bd = 0, bg = "#002C62", fg = "#FFFFFF", command = add_subject_ok, font = font_settings)
-                ok_button.grid(row = 6, column = 0, columnspan = 2, sticky = N+E+W+S, padx = 10, pady = 10)
+                ok_button.grid(row = 13, column = 0, columnspan = 2, sticky = N+E+W+S, padx = 10, pady = 10)
 
-                add_screen.mainloop() 
+                add_screen.mainloop()
 
 
 
@@ -188,16 +246,22 @@ class PageOne(tkinter.Frame) :
             subject_treeview.delete(subject_treeview.selection()[0])
 
             save_data() # 과목 삭제 후 자동으로 저장
-
-
-
+        # 과목 수정하기
+        def modify_subject():
+            delete_subject()
+            add_subject() 
+            
         # 과목 추가 버튼
         add_subject_button = Button(self, text = "추가", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 10, height = 1, pady = 5, font = font_settings, command = add_subject)
-        add_subject_button.place(x = 406, y = 256)
+        add_subject_button.place(x = 308, y = 256)
 
         # 과목 삭제 버튼
         delete_subject_button = Button(self, text = "삭제", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 10, height = 1, pady = 5, font = font_settings, command = delete_subject)
         delete_subject_button.grid(row = 3, column = 3, sticky = "e")
+        
+        # 과목 수정 버튼
+        modify_subject_button = Button(self, text = "수정", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 10, height = 1, pady = 5, font = font_settings, command = modify_subject)
+        modify_subject_button.place(x = 406, y=256)
 
 
 
