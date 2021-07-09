@@ -7,6 +7,7 @@ import sys
 import os
 from tkinter import *
 
+# 설치후 최초 실행시 발생하는 오류 수정
 f=open('202101.txt', 'a')
 f.close()
 
@@ -74,7 +75,6 @@ class PageOne(tkinter.Frame) :
         subject_treeview.heading("#6", text = "평점", anchor = W)
 
 
-
         # 데이터 불러오기
         def open_data() :
             file = open(file = "202101.txt", mode = "r", encoding = "utf-8")
@@ -92,10 +92,8 @@ class PageOne(tkinter.Frame) :
 
                 subject_treeview.insert(parent = "", index = "end", text = "", values = data)
 
-        
 
         open_data() # 자동으로 데이터를 불러옴
-
 
 
         # 데이터 저장하기
@@ -110,11 +108,10 @@ class PageOne(tkinter.Frame) :
             file.close()
 
 
-
         def add_subject() :
             number_of_items = len(subject_treeview.get_children())
 
-            if number_of_items == 10 :
+            if number_of_items > 15 :
                 tkinter.messagebox.showwarning("", "더 이상 추가할 수 없습니다.")
             
             else :
@@ -327,7 +324,6 @@ class PageTwo(tkinter.Frame) :
                         file.readline().rstrip("\n"))
 
                 subject_treeview.insert(parent = "", index = "end", text = "", values = data)
-
 
 
         # PageOne과 동일
