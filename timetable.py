@@ -11,6 +11,7 @@ from tkinter import *
 f=open('202101.txt', 'a')
 f.close()
 
+# 메인 창 실행하는 코드
 class App(tkinter.Tk) :
     def __init__(self) :
         tkinter.Tk.__init__(self)
@@ -92,9 +93,7 @@ class PageOne(tkinter.Frame) :
 
                 subject_treeview.insert(parent = "", index = "end", text = "", values = data)
 
-
-        open_data() # 자동으로 데이터를 불러옴
-
+        open_data() # 프로그램 실행 시 자동으로 데이터를 불러옴
 
         # 데이터 저장하기
         def save_data() :
@@ -107,13 +106,14 @@ class PageOne(tkinter.Frame) :
                         file.write(data[j] + "\n")
             file.close()
 
-
+        # 과목 추가하기
         def add_subject() :
             number_of_items = len(subject_treeview.get_children())
 
             if number_of_items > 15 :
                 tkinter.messagebox.showwarning("", "더 이상 추가할 수 없습니다.")
-            
+            # 15과목 이상은 입력할수 없게 처리함
+
             else :
                 add_screen = Tk()
                 add_screen.title("과목 추가")
@@ -147,6 +147,7 @@ class PageOne(tkinter.Frame) :
                 time_label = Label(add_screen, text = "시간", font = font_settings)
                 time_label.grid(row = 6, column = 0, sticky = W+S, padx = 10, pady = 4)
 
+                # 잘못 입력했을 시 초기화할수 있도록 빈 선택지도 추가
                 days_list = ["","월요일", "화요일", "수요일", "목요일", "금요일"]
                 period_list = ["","1교시", "2교시", "3교시", "4교시", "5교시", "6교시", "7교시", "8교시", "9교시", "10교시", "11교시", "12교시"]
 
@@ -243,7 +244,8 @@ class PageOne(tkinter.Frame) :
             subject_treeview.delete(subject_treeview.selection()[0])
 
             save_data() # 과목 삭제 후 자동으로 저장
-        # 과목 수정하기
+
+        # 과목 수정하기(보완 예정)
         def modify_subject():
             delete_subject()
             add_subject() 
@@ -387,12 +389,12 @@ class PageTwo(tkinter.Frame) :
             else :
                 tkinter.messagebox.showwarning("", "과목을 선택하세요.") # 선택된 항목이 없으면 경고 표시
 
-
+        # 평점을 계산하는 부분 
         def calc_score() :
             file = open(file = "202101.txt", mode = "r", encoding = "utf-8")
             lines = len(file.readlines())
             file.close()
-
+        # 배열 관련된 부분은 추후 최적화할 예정
             score=[]
             number=[]
             major=[]
