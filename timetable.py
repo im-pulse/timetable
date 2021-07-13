@@ -7,11 +7,9 @@ import sys
 import os
 from tkinter import *
 
-# 설치후 최초 실행시 발생하는 오류 수정
 f=open('202101.txt', 'a')
 f.close()
 
-# 메인 창 실행하는 코드
 class App(tkinter.Tk) :
     def __init__(self) :
         tkinter.Tk.__init__(self)
@@ -76,6 +74,7 @@ class PageOne(tkinter.Frame) :
         subject_treeview.heading("#6", text = "평점", anchor = W)
 
 
+
         # 데이터 불러오기
         def open_data() :
             file = open(file = "202101.txt", mode = "r", encoding = "utf-8")
@@ -93,7 +92,11 @@ class PageOne(tkinter.Frame) :
 
                 subject_treeview.insert(parent = "", index = "end", text = "", values = data)
 
-        open_data() # 프로그램 실행 시 자동으로 데이터를 불러옴
+        
+
+        open_data() # 자동으로 데이터를 불러옴
+
+
 
         # 데이터 저장하기
         def save_data() :
@@ -106,14 +109,14 @@ class PageOne(tkinter.Frame) :
                         file.write(data[j] + "\n")
             file.close()
 
-        # 과목 추가하기
+
+
         def add_subject() :
             number_of_items = len(subject_treeview.get_children())
 
-            if number_of_items > 15 :
+            if number_of_items == 10 :
                 tkinter.messagebox.showwarning("", "더 이상 추가할 수 없습니다.")
-            # 15과목 이상은 입력할수 없게 처리함
-
+            
             else :
                 add_screen = Tk()
                 add_screen.title("과목 추가")
@@ -147,7 +150,6 @@ class PageOne(tkinter.Frame) :
                 time_label = Label(add_screen, text = "시간", font = font_settings)
                 time_label.grid(row = 6, column = 0, sticky = W+S, padx = 10, pady = 4)
 
-                # 잘못 입력했을 시 초기화할수 있도록 빈 선택지도 추가
                 days_list = ["","월요일", "화요일", "수요일", "목요일", "금요일"]
                 period_list = ["","1교시", "2교시", "3교시", "4교시", "5교시", "6교시", "7교시", "8교시", "9교시", "10교시", "11교시", "12교시"]
 
@@ -244,11 +246,128 @@ class PageOne(tkinter.Frame) :
             subject_treeview.delete(subject_treeview.selection()[0])
 
             save_data() # 과목 삭제 후 자동으로 저장
-
-        # 과목 수정하기(보완 예정)
+        # 과목 수정하기
         def modify_subject():
-            delete_subject()
-            add_subject() 
+
+            item=subject_treeview.selection()[0]
+
+            add_screen = Tk()
+            add_screen.title("과목 수정")
+            add_screen.resizable(False, False)
+
+            # 과목명 항목
+            subject_label = Label(add_screen, text = "과목명", font = font_settings)
+            subject_label.grid(row = 1, column = 0, sticky = W, padx = 10, pady = 10)
+            subject = Entry(add_screen, width = 20, bd = 0, font = font_settings)
+            subject.grid(row = 1, column = 1, sticky = N+E+W+S, padx = 10, pady = 10)
+
+            # 교수명 항목
+            professor_label = Label(add_screen, text = "교수명", font = font_settings)
+            professor_label.grid(row = 2, column = 0, sticky = W, padx = 10, pady = 10)
+            professor = Entry(add_screen, width = 20, bd = 0, font = font_settings)
+            professor.grid(row = 2, column = 1, sticky = N+E+W+S, padx = 10, pady = 10)
+
+            # 학점 항목
+            credit_label = Label(add_screen, text = "학점", font = font_settings)
+            credit_label.grid(row = 3, column = 0, sticky = W, padx = 10, pady = 10)
+            credit = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 5, values = [1, 2, 3, 4, 5], font = font_settings)
+            credit.grid(row = 3, column = 1, sticky = N+E+W+S, padx = 10, pady = 10)
+
+            # 이수구분 항목
+            type_label = Label(add_screen, text = "이수구분", font = font_settings)
+            type_label.grid(row = 4, column = 0, sticky = W, padx = 10, pady = 10)
+            type = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 3, values = ["전공", "MSC교과", "교양"], font = font_settings)
+            type.grid(row = 4, column = 1, sticky = N+E+W+S, padx = 10, pady = 10)
+
+            # 시간 항목
+            time_label = Label(add_screen, text = "시간", font = font_settings)
+            time_label.grid(row = 6, column = 0, sticky = W+S, padx = 10, pady = 4)
+
+            days_list = ["","월요일", "화요일", "수요일", "목요일", "금요일"]
+            period_list = ["","1교시", "2교시", "3교시", "4교시", "5교시", "6교시", "7교시", "8교시", "9교시", "10교시", "11교시", "12교시"]
+
+            time_1_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_1_days.grid(row = 6, column = 1, sticky = W+S, padx = 10)
+            time_1_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_1_period.grid(row = 6, column = 2, sticky = E+S, padx = 10)
+
+            time_2_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_2_days.grid(row = 7, column = 1, sticky = W, padx = 10)
+            time_2_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_2_period.grid(row = 7, column = 2, sticky = E, padx = 10)
+
+            time_3_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_3_days.grid(row = 8, column = 1, sticky = W, padx = 10)
+            time_3_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_3_period.grid(row = 8, column = 2, sticky = E, padx = 10)
+
+            time_4_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_4_days.grid(row = 9, column = 1, sticky = W, padx = 10)
+            time_4_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_4_period.grid(row = 9, column = 2, sticky = E, padx = 10)
+
+            time_5_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_5_days.grid(row = 10, column = 1, sticky = W, padx = 10)
+            time_5_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_5_period.grid(row = 10, column = 2, sticky = E, padx = 10)
+
+            time_6_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_6_days.grid(row = 11, column = 1, sticky = W, padx = 10)
+            time_6_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_6_period.grid(row = 11, column = 2, sticky = E, padx = 10)
+
+
+
+            # 모든 항목 정상적으로 입력 여부 확인
+            def add_subject_ok() :
+                time = []
+
+                if time_1_days.get() != "" and time_1_period.get() != "" :
+                    time_1 = str(time_1_days.get()[0]) + str(time_1_period.get()).replace("교시", "")
+                    time.append(time_1)
+
+                if time_2_days.get() != "" and time_2_period.get() != "" :
+                    time_2 = str(time_2_days.get()[0]) + str(time_2_period.get()).replace("교시", "")
+                    time.append(time_2)
+
+                if time_3_days.get() != "" and time_3_period.get() != "" :
+                    time_3 = str(time_3_days.get()[0]) + str(time_3_period.get()).replace("교시", "")
+                    time.append(time_3)
+
+                if time_4_days.get() != "" and time_4_period.get() != "" :
+                    time_4 = str(time_4_days.get()[0]) + str(time_4_period.get()).replace("교시", "")
+                    time.append(time_4)
+
+                if time_5_days.get() != "" and time_5_period.get() != "" :
+                    time_5 = str(time_5_days.get()[0]) + str(time_5_period.get()).replace("교시", "")
+                    time.append(time_5)
+
+                if time_6_days.get() != "" and time_6_period.get() != "" :
+                    time_6 = str(time_6_days.get()[0]) + str(time_6_period.get()).replace("교시", "")
+                    time.append(time_6)
+
+                time = tuple(time)
+
+                if subject.get() == "" :
+                    tkinter.messagebox.showwarning("", "과목명을 입력하세요.")
+                elif professor.get() == "" :
+                    tkinter.messagebox.showwarning("", "교수명을 입력하세요.")
+                elif credit.get() == "" :
+                    tkinter.messagebox.showwarning("", "학점을 선택하세요.")
+                elif type.get() == "" :
+                    tkinter.messagebox.showwarning("", "이수구분을 선택하세요.")
+                elif time == "" :
+                    tkinter.messagebox.showwarning("", "시간을 선택하세요.")
+                else :
+                    subject_treeview.item(item, values = (subject.get(), professor.get(), credit.get(), type.get(), time, "0"))
+
+                    save_data() # 과목 입력 후 자동으로 저장
+                    add_screen.destroy() 
+
+            ok_button = Button(add_screen, text = "확인", bd = 0, bg = "#002C62", fg = "#FFFFFF", command = add_subject_ok, font = font_settings)
+            ok_button.grid(row = 13, column = 0, columnspan = 2, sticky = N+E+W+S, padx = 10, pady = 10)
+
+            add_screen.mainloop()        
             
         # 과목 추가 버튼
         add_subject_button = Button(self, text = "추가", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 10, height = 1, pady = 5, font = font_settings, command = add_subject)
@@ -328,6 +447,7 @@ class PageTwo(tkinter.Frame) :
                 subject_treeview.insert(parent = "", index = "end", text = "", values = data)
 
 
+
         # PageOne과 동일
         open_data()
 
@@ -389,12 +509,12 @@ class PageTwo(tkinter.Frame) :
             else :
                 tkinter.messagebox.showwarning("", "과목을 선택하세요.") # 선택된 항목이 없으면 경고 표시
 
-        # 평점을 계산하는 부분 
+
         def calc_score() :
             file = open(file = "202101.txt", mode = "r", encoding = "utf-8")
             lines = len(file.readlines())
             file.close()
-        # 배열 관련된 부분은 추후 최적화할 예정
+
             score=[]
             number=[]
             major=[]
