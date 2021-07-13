@@ -92,10 +92,7 @@ class PageOne(tkinter.Frame) :
 
                 subject_treeview.insert(parent = "", index = "end", text = "", values = data)
 
-        
-
         open_data() # 자동으로 데이터를 불러옴
-
 
 
         # 데이터 저장하기
@@ -110,11 +107,10 @@ class PageOne(tkinter.Frame) :
             file.close()
 
 
-
         def add_subject() :
             number_of_items = len(subject_treeview.get_children())
 
-            if number_of_items == 10 :
+            if number_of_items > 15 :
                 tkinter.messagebox.showwarning("", "더 이상 추가할 수 없습니다.")
             
             else :
