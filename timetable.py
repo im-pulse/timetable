@@ -92,7 +92,10 @@ class PageOne(tkinter.Frame) :
 
                 subject_treeview.insert(parent = "", index = "end", text = "", values = data)
 
+        
+
         open_data() # 자동으로 데이터를 불러옴
+
 
 
         # 데이터 저장하기
@@ -105,6 +108,7 @@ class PageOne(tkinter.Frame) :
                     for j in range(0, 6) : 
                         file.write(data[j] + "\n")
             file.close()
+
 
 
         def add_subject() :
@@ -247,69 +251,69 @@ class PageOne(tkinter.Frame) :
 
             item=subject_treeview.selection()[0]
 
-            add_screen = Tk()
-            add_screen.title("과목 수정")
-            add_screen.resizable(False, False)
+            modify_screen = Tk()
+            modify_screen.title("과목 수정")
+            modify_screen.resizable(False, False)
 
             # 과목명 항목
-            subject_label = Label(add_screen, text = "과목명", font = font_settings)
+            subject_label = Label(modify_screen, text = "과목명", font = font_settings)
             subject_label.grid(row = 1, column = 0, sticky = W, padx = 10, pady = 10)
-            subject = Entry(add_screen, width = 20, bd = 0, font = font_settings)
+            subject = Entry(modify_screen, width = 20, bd = 0, font = font_settings)
             subject.grid(row = 1, column = 1, sticky = N+E+W+S, padx = 10, pady = 10)
 
             # 교수명 항목
-            professor_label = Label(add_screen, text = "교수명", font = font_settings)
+            professor_label = Label(modify_screen, text = "교수명", font = font_settings)
             professor_label.grid(row = 2, column = 0, sticky = W, padx = 10, pady = 10)
-            professor = Entry(add_screen, width = 20, bd = 0, font = font_settings)
+            professor = Entry(modify_screen, width = 20, bd = 0, font = font_settings)
             professor.grid(row = 2, column = 1, sticky = N+E+W+S, padx = 10, pady = 10)
 
             # 학점 항목
-            credit_label = Label(add_screen, text = "학점", font = font_settings)
+            credit_label = Label(modify_screen, text = "학점", font = font_settings)
             credit_label.grid(row = 3, column = 0, sticky = W, padx = 10, pady = 10)
-            credit = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 5, values = [1, 2, 3, 4, 5], font = font_settings)
+            credit = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 5, values = [1, 2, 3, 4, 5], font = font_settings)
             credit.grid(row = 3, column = 1, sticky = N+E+W+S, padx = 10, pady = 10)
 
             # 이수구분 항목
-            type_label = Label(add_screen, text = "이수구분", font = font_settings)
+            type_label = Label(modify_screen, text = "이수구분", font = font_settings)
             type_label.grid(row = 4, column = 0, sticky = W, padx = 10, pady = 10)
-            type = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 3, values = ["전공", "MSC교과", "교양"], font = font_settings)
+            type = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 3, values = ["전공", "MSC교과", "교양"], font = font_settings)
             type.grid(row = 4, column = 1, sticky = N+E+W+S, padx = 10, pady = 10)
 
             # 시간 항목
-            time_label = Label(add_screen, text = "시간", font = font_settings)
+            time_label = Label(modify_screen, text = "시간", font = font_settings)
             time_label.grid(row = 6, column = 0, sticky = W+S, padx = 10, pady = 4)
 
             days_list = ["","월요일", "화요일", "수요일", "목요일", "금요일"]
             period_list = ["","1교시", "2교시", "3교시", "4교시", "5교시", "6교시", "7교시", "8교시", "9교시", "10교시", "11교시", "12교시"]
 
-            time_1_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_1_days = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
             time_1_days.grid(row = 6, column = 1, sticky = W+S, padx = 10)
-            time_1_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_1_period = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
             time_1_period.grid(row = 6, column = 2, sticky = E+S, padx = 10)
 
-            time_2_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_2_days = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
             time_2_days.grid(row = 7, column = 1, sticky = W, padx = 10)
-            time_2_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_2_period = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
             time_2_period.grid(row = 7, column = 2, sticky = E, padx = 10)
 
-            time_3_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_3_days = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
             time_3_days.grid(row = 8, column = 1, sticky = W, padx = 10)
-            time_3_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_3_period = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
             time_3_period.grid(row = 8, column = 2, sticky = E, padx = 10)
 
-            time_4_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_4_days = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
             time_4_days.grid(row = 9, column = 1, sticky = W, padx = 10)
-            time_4_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_4_period = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
             time_4_period.grid(row = 9, column = 2, sticky = E, padx = 10)
 
-            time_5_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_5_days = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
             time_5_days.grid(row = 10, column = 1, sticky = W, padx = 10)
-            time_5_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_5_period = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
             time_5_period.grid(row = 10, column = 2, sticky = E, padx = 10)
 
-            time_6_days = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
+            time_6_days = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 6, width = 8, values = days_list, font = font_settings)
             time_6_days.grid(row = 11, column = 1, sticky = W, padx = 10)
-            time_6_period = tkinter.ttk.Combobox(add_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
+            time_6_period = tkinter.ttk.Combobox(modify_screen, state = "readonly", height = 13, width = 8, values = period_list, font = font_settings)
             time_6_period.grid(row = 11, column = 2, sticky = E, padx = 10)
 
 
@@ -358,12 +362,12 @@ class PageOne(tkinter.Frame) :
                     subject_treeview.item(item, values = (subject.get(), professor.get(), credit.get(), type.get(), time, "0"))
 
                     save_data() # 과목 입력 후 자동으로 저장
-                    add_screen.destroy() 
+                    modify_screen.destroy() 
 
-            ok_button = Button(add_screen, text = "확인", bd = 0, bg = "#002C62", fg = "#FFFFFF", command = add_subject_ok, font = font_settings)
+            ok_button = Button(modify_screen, text = "확인", bd = 0, bg = "#002C62", fg = "#FFFFFF", command = add_subject_ok, font = font_settings)
             ok_button.grid(row = 13, column = 0, columnspan = 2, sticky = N+E+W+S, padx = 10, pady = 10)
 
-            add_screen.mainloop()        
+            modify_screen.mainloop()        
             
         # 과목 추가 버튼
         add_subject_button = Button(self, text = "추가", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 10, height = 1, pady = 5, font = font_settings, command = add_subject)
@@ -593,12 +597,17 @@ class PageTwo(tkinter.Frame) :
             maverage=round(maverage,2)                             
             msgbox.showinfo("평점", "총평점: "+str(average) + " 전공평점: " +str(maverage) + " 학점수: " +str(sum(number)+sum(pnumber))) 
 
+        def total_grade():
+            msgbox.showwarning("미구현 기능", "준비중입니다.")    
+
 
         # 평점 입력 버튼
         add_score_button = Button(self, text = "평점 입력", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 10, height = 1, pady = 5, font = font_settings, command = add_score)
-        calc_score_button = Button(self, text = "학점 계산", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 10, height = 1, pady = 5, font = font_settings, command = calc_score)
+        calc_score_button = Button(self, text = "금학기 학점 계산", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 15, height = 1, pady = 5, font = font_settings, command = calc_score)
+        calc_total_button = Button(self, text = "총 학점 계산", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 12, height = 1, pady = 5, font = font_settings, command = total_grade)
         add_score_button.grid(row = 3, column = 3, sticky = "e")
-        calc_score_button.place(x = 406, y = 256) 
+        calc_score_button.place(x = 245, y = 256)
+        calc_total_button.place(x = 388, y = 256) 
 
 class PageThree(tkinter.Frame) :    
     def __init__(self, master) :
