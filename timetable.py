@@ -597,17 +597,13 @@ class PageTwo(tkinter.Frame) :
             maverage=round(maverage,2)                             
             msgbox.showinfo("평점", "총평점: "+str(average) + " 전공평점: " +str(maverage) + " 학점수: " +str(sum(number)+sum(pnumber))) 
 
-        def total_grade():
-            msgbox.showwarning("미구현 기능", "준비중입니다.")    
 
 
         # 평점 입력 버튼
         add_score_button = Button(self, text = "평점 입력", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 10, height = 1, pady = 5, font = font_settings, command = add_score)
-        calc_score_button = Button(self, text = "금학기 학점 계산", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 15, height = 1, pady = 5, font = font_settings, command = calc_score)
-        calc_total_button = Button(self, text = "총 학점 계산", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 12, height = 1, pady = 5, font = font_settings, command = total_grade)
+        calc_score_button = Button(self, text = "학점 계산", bd = 0, bg = "#002C62", fg = "#FFFFFF", width = 10, height = 1, pady = 5, font = font_settings, command = calc_score)
         add_score_button.grid(row = 3, column = 3, sticky = "e")
-        calc_score_button.place(x = 245, y = 256)
-        calc_total_button.place(x = 388, y = 256) 
+        calc_score_button.place(x = 406, y=256)
 
 class PageThree(tkinter.Frame) :    
     def __init__(self, master) :
