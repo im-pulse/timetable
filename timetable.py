@@ -1,7 +1,7 @@
 import tkinter
 import tkinter.font
 import tkinter.ttk as ttk
-import tkinter.messagebox as msgbox
+import tkinter.messagebox 
 import math
 import sys
 import os
@@ -595,7 +595,7 @@ class PageTwo(tkinter.Frame) :
             else:
                 maverage=((sum(major)/sum(mnumber)))
             maverage=round(maverage,2)                             
-            msgbox.showinfo("평점", "총평점: "+str(average) + " 전공평점: " +str(maverage) + " 학점수: " +str(sum(number)+sum(pnumber))) 
+            tkinter.messagebox.showinfo("평점", "총평점: "+str(average) + " 전공평점: " +str(maverage) + " 학점수: " +str(sum(number)+sum(pnumber))) 
 
 
 
@@ -642,6 +642,8 @@ class PageThree(tkinter.Frame) :
                     continue
 
         open_data()
+        tkinter.messagebox.showwarning("", "시간표 실행 시 프로그램의 표가 정상적으로 보이지 않는 오류가 있습니다. \
+시간표 창을 종료 후 기존처럼 창을 옮기시면 다시 정상적으로 보여지니 참고 부탁드립니다!")
         root= Tk()
         root.title("시간표입니다")
         root.geometry("640x480+100+300") 
@@ -808,7 +810,9 @@ class PageThree(tkinter.Frame) :
         
         filename="시간표.txt"
         def open_data() :
-            if os.path.isfile(filename):
+            if not os.path.isfile(filename):
+                tkinter.messagebox.showwarning("", "파일이 없습니다.")                    
+            else:
                 with open(filename, "r", encoding="utf8") as file:
                     line=file.readline()
                     text_1.insert("end",line)
@@ -909,8 +913,9 @@ class PageThree(tkinter.Frame) :
                     line=file.readline()
                     text_49.insert("end",line)
                     line=file.readline()
-                    text_50.insert("end",line)
-            file.close()
+                    text_50.insert("end",line)    
+                file.close()
+
 
         def save_data() :
             with open(filename, "w", encoding="utf8") as file:
@@ -965,7 +970,18 @@ class PageThree(tkinter.Frame) :
                 file.write(text_49.get("1.0", "end"))
                 file.write(text_50.get("1.0", "end"))          
 
+        def reset():
+            if os.path.isfile('시간표.txt'):
+                os.remove('시간표.txt')
+                tkinter.messagebox.showinfo("", "시간표가 초기화되었습니다.")
+            else:
+                tkinter.messagebox.showwarning("", "파일이 없습니다.")
+            root.destroy()    
 
+
+
+        reset_button = Button(root, text = '초기화', command= reset)
+        reset_button.grid(column = 9, row = 8, padx = 5, pady=5)
         open_button = Button(root, text = '불러오기', command=open_data)
         open_button.grid(column = 9, row = 9, padx = 5, pady=5)
         save_button = Button(root, text = '저장하기', command=save_data)
